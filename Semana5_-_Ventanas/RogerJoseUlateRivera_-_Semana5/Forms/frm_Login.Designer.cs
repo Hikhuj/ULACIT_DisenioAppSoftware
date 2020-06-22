@@ -39,21 +39,23 @@
             // 
             // btn_ingresar
             // 
-            this.btn_ingresar.Location = new System.Drawing.Point(48, 171);
+            this.btn_ingresar.Location = new System.Drawing.Point(152, 170);
             this.btn_ingresar.Name = "btn_ingresar";
             this.btn_ingresar.Size = new System.Drawing.Size(75, 23);
             this.btn_ingresar.TabIndex = 0;
             this.btn_ingresar.Text = "Ingresar";
             this.btn_ingresar.UseVisualStyleBackColor = true;
+            this.btn_ingresar.Click += new System.EventHandler(this.btn_ingresar_Click);
             // 
             // btn_salir
             // 
-            this.btn_salir.Location = new System.Drawing.Point(152, 171);
+            this.btn_salir.Location = new System.Drawing.Point(51, 170);
             this.btn_salir.Name = "btn_salir";
             this.btn_salir.Size = new System.Drawing.Size(75, 23);
             this.btn_salir.TabIndex = 1;
             this.btn_salir.Text = "Salir";
             this.btn_salir.UseVisualStyleBackColor = true;
+            this.btn_salir.Click += new System.EventHandler(this.btn_salir_Click);
             // 
             // lbl_Usuario
             // 
@@ -113,6 +115,7 @@
             this.Controls.Add(this.btn_ingresar);
             this.Name = "frm_Login";
             this.Text = "frm_Login";
+            this.Load += new System.EventHandler(this.frm_Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

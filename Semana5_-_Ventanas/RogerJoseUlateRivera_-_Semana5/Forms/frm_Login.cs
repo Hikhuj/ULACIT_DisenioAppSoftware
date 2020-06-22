@@ -26,5 +26,22 @@ namespace RogerJoseUlateRivera___Semana5.Forms
         {
 
         }
+
+        private void frm_Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_ingresar_Click(object sender, EventArgs e)
+        {
+            Form miFormulario = new frm_Menu();
+            this.Dispose();
+            this.Close();
+        }
+
+        private void btn_salir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -4,20 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RogerJoseUlateRivera___Semana5
+namespace DEMO
 {
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        /// Punto de entrada principal para la aplicación.
         /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.frm_Login());
-
+            Application.Run(new Main());
         }
     }
 }
