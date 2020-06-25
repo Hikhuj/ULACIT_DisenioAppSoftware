@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cuenta.cs" />
+    <Compile Include="DevCom.cs" />
     <Compile Include="Forms\frm_Depositar.cs">
       <SubType>Form</SubType>
     </Compile>
