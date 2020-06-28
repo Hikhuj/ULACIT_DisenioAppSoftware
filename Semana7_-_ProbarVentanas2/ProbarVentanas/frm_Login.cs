@@ -25,11 +25,24 @@ namespace ProbarVentanas
         private void button1_Click(object sender, EventArgs e)
         {
 
-            this.Hide();
+            // Necesito conectarme a DevCom.
+            // A: Referencio DevCom aca.
 
-            Form miformulario = new frm_Menu();
-            miformulario.Show();
+            // Si el usuario y contrasenia da TRUE
+            if (DevCom.claveValida(txtbox_usuario.Text, txtbox_clave.Text))
+            {
 
+                // HIDE window
+                this.Hide();
+
+                // SHOW menu
+                Form miformulario = new frm_Menu();
+                miformulario.Show();
+            }
+            else
+            {
+                MessageBox.Show("Clave incorrecta", "Error");
+            }
             
             //this.Dispose();
             //this.Hide();

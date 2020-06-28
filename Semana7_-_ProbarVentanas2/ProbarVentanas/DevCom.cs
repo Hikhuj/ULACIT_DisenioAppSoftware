@@ -83,21 +83,39 @@ namespace ProbarVentanas
 
         public static Boolean claveValida(String Usr, String Pwd)
         {
-            String Resultado = "";
+            // Crear una variable resultado para ser usada más adelante
+            String resultado = "";
+            // Crear objeto de tipo DataSet para manipular los datos retornados de la consulta.
+            DataSet ds = new DataSet();
+            // Se crea una conexion de base de datos, Objeto de tipo SqlConnection
             SqlConnection conx = new SqlConnection();
+
+
+            // Se llama a la funcion RetornaAcceso
             conx = RetornaAcceso();
 
-            SqlDataAdapter da = new SqlDataAdapter("SELECT COUNT(USERNAME) as DATA FROM CAT_USERS WHERE USERNAME='"
-                + Usr + "' AND PASSWORD='" + Pwd + "'", conx);
+            // Inicializar el objeto SqlDataAdapter con el resultado de la consulta a realizar, Appending User, Pass y conexion.
+            // Consulta: Retorna un conteo de cuandos usuarios tienen el User y Pass igual a los parametros recibidos.
+            SqlDataAdapter da = new SqlDataAdapter("SELECT COUNT(USERNAME) as DATA FROM CAT_USERS WHERE USERNAME='" + Usr + "' AND PASSWORD='" + Pwd + "'", conx);
 
-            DataSet ds = new DataSet();
-
+            // Llenar el objeto DS con los datos retornados de DA con la funcion .Fill()
             da.Fill(ds);
-            Resultado = ds.Tables[0].Rows[0]["DATA"].ToString();
+
+            // Se toma el objeto DataSet y se almacena en una variable tipo String
+            resultado = ds.Tables[0].Rows[0]["DATA"].ToString();
+
+            // Se deshecha el objeto DataSet.
             ds.Dispose();
 
-            if (Resultado == "1") return true;
-            else return false;
+
+            if (resultado == "1")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
             
         }
@@ -175,25 +193,40 @@ namespace ProbarVentanas
         }
 
         public static String RetornaDataConfig() {
+
+            // Retorna la configuracion de la base de datos que se almacena por lo general en el
+            // projectName/bin/debugAnd-OrRelease/CNN.CONFIG
+
             String Server = "";
             String Catalog= "";
             String Security = "";
+
+            // Se llama a la clase que permite tomar el archivo y almacenarlo en un objeto de tipo StreamReader.
             System.IO.StreamReader file =
                 new System.IO.StreamReader(@"CNN.CONFIG");
 
+            // Almacenar cada linea que se necesita en su respectiva categoria
             Server = file.ReadLine();
             Catalog= file.ReadLine();
             Security = file.ReadLine();
 
-            return "Data Source="+ Server + "; Initial Catalog='"+
-                Catalog + "';  " + Security + " " ;
+            // Retornar el archivo en un StringChain
+            return "Data Source=" + Server + "; Initial Catalog='" + Catalog + "';  " + Security + " " ;
         }
 
         
 
         public static SqlConnection RetornaAcceso() {
+            // Funcion reforna la conexion a la base de datos
+
+            // Crear objeto de tipo SqlConnection para almacenar la conexion.
             SqlConnection conecta = new SqlConnection();
+
+            // Se almacena en el objeto *conecta* los parametros de conexion a la DB,
+            // Se hace llamado del metdo RetornaDataConfig para que retorne la configuracion de la DB
             conecta.ConnectionString = RetornaDataConfig();
+
+            // Retorna conexion
             return conecta;
         }
 
