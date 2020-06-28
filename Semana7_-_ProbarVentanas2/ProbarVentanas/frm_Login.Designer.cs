@@ -63,6 +63,7 @@
             this.txtbox_clave.Location = new System.Drawing.Point(108, 232);
             this.txtbox_clave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtbox_clave.Name = "txtbox_clave";
+            this.txtbox_clave.PasswordChar = '*';
             this.txtbox_clave.Size = new System.Drawing.Size(152, 20);
             this.txtbox_clave.TabIndex = 3;
             // 
