@@ -56,5 +56,10 @@ namespace ProbarVentanas
             this.Dispose();
 
         }
+
+        private void txtbox_usuario_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

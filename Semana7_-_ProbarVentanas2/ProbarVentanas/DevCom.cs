@@ -40,7 +40,7 @@ namespace ProbarVentanas
             return ds;
         }
 
-        public  DataSet GetCuenta(String XData)
+        public DataSet GetCuenta(String XData)
         {
             SqlConnection conx = new SqlConnection();
             conx = RetornaAcceso();
@@ -63,15 +63,13 @@ namespace ProbarVentanas
             return ds;
         }
 
-
         public static String ConsultarClave(String Usr, String Pwd)
         {
             String abc = "";
             SqlConnection conx = new SqlConnection();
             conx = RetornaAcceso();
 
-            SqlDataAdapter da = new SqlDataAdapter("SELECT COUNT(USERNAME) as DATA FROM CAT_USERS WHERE USERNAME='"
-                + Usr + "' AND PASSWORD='" + Pwd + "'", conx);
+            SqlDataAdapter da = new SqlDataAdapter("SELECT COUNT(USERNAME) as DATA FROM CAT_USERS WHERE USERNAME='" + Usr + "' AND PASSWORD='" + Pwd + "'", conx);
 
             DataSet ds = new DataSet();
 
@@ -80,6 +78,32 @@ namespace ProbarVentanas
             return abc;
         }
 
+        /*
+        public static Boolean consultarCuenta(string idCuenta)
+        {
+            string data = "";
+            Boolean resultado = false;
+
+            SqlConnection conx = new SqlConnection();
+            conx = RetornaAcceso();
+
+            SqlDataAdapter da = new SqlDataAdapter("SELECT ID FROM CAT_CUENTAS WHERE ID ='" + idCuenta + "'", conx);
+            DataSet ds = new DataSet();
+
+            da.Fill(ds);
+
+            data = ds.Tables[0].Rows[0]["DATA"].ToString();
+
+            da.Dispose();
+
+            if (data == idCuenta)
+            {
+                resultado = true;
+            }
+
+            return resultado;
+        }
+        */
 
         public static Boolean claveValida(String Usr, String Pwd)
         {
@@ -120,7 +144,7 @@ namespace ProbarVentanas
             
         }
 
-        public static DataSet consultaGeneral( String Sql)
+        public static DataSet consultaGeneral(String Sql)
         {
             String Resultado = "";
             SqlConnection conx = new SqlConnection();
@@ -141,10 +165,6 @@ namespace ProbarVentanas
 
 
         }
-
-
-
-
 
         public  void IngresaCuenta(String ID, String Nombre_Cliente, String SALDO_ACTUAL)
         {
@@ -170,7 +190,7 @@ namespace ProbarVentanas
 
         }
 
-        public void ActualizarCuenta(String ID, String Nombre_Cliente, String SALDO_ACTUAL) {
+        public static void ActualizarCuenta(String ID, String Nombre_Cliente, String SALDO_ACTUAL) {
             SqlConnection conx = new SqlConnection();
             conx = RetornaAcceso();
             using (SqlCommand cmd = new SqlCommand("UPDATE CAT_CUENTAS SET ID=@ID,  " +
@@ -180,6 +200,28 @@ namespace ProbarVentanas
             {
                 cmd.Parameters.AddWithValue("@ID", ID);
                 cmd.Parameters.AddWithValue("@NOMBRE_CLIENTE", Nombre_Cliente);
+                cmd.Parameters.AddWithValue("@SALDO_ACTUAL", SALDO_ACTUAL);
+
+                cmd.Connection = conx;
+                conx.Open();
+                cmd.ExecuteNonQuery();
+                conx.Close();
+            }
+
+
+
+        }
+
+        public static void DepositarCuenta(String ID, String SALDO_ACTUAL)
+        {
+            SqlConnection conx = new SqlConnection();
+            conx = RetornaAcceso();
+            using (SqlCommand cmd = new SqlCommand("UPDATE CAT_CUENTAS" +
+                " SET SALDO_ACTUAL=@SALDO_ACTUAL " +
+                " WHERE ID=@ID"))
+
+            {
+                cmd.Parameters.AddWithValue("@ID", ID);
                 cmd.Parameters.AddWithValue("@SALDO_ACTUAL", SALDO_ACTUAL);
 
                 cmd.Connection = conx;
@@ -214,8 +256,6 @@ namespace ProbarVentanas
             return "Data Source=" + Server + "; Initial Catalog='" + Catalog + "';  " + Security + " " ;
         }
 
-        
-
         public static SqlConnection RetornaAcceso() {
             // Funcion reforna la conexion a la base de datos
 
@@ -229,8 +269,6 @@ namespace ProbarVentanas
             // Retorna conexion
             return conecta;
         }
-
-
 
         public void IngresaMovimiento(String ID_CUENTA, String ID_MOVTO, Double MONTO_MOVTO)
         {
@@ -255,12 +293,6 @@ namespace ProbarVentanas
             }
 
         }
-
-
-
-
-
-
 
     }
 }
